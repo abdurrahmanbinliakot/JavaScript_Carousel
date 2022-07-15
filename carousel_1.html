@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Carousel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+</head>
+<body>
+  <h2 class="first-letter:text-red-600 [font-family:'Josefin_Sans',sans-serif;] capitalize text-center font-bold  text-4xl my-6 text-zinc-700">JavaScript Carousel</h2>
+
+<div class="caro_wap mx-auto relative w-[600px] h-[300px] bg-blue-400">
+  <div class="caro_item hidden mx-auto top-0 left-0 right-0 bottom-0 absolute bg-gray-400  text-4xl text-white"></div>
+  <div class="caro_item hidden mx-auto top-0 left-0 right-0 bottom-0 absolute bg-gray-400  text-4xl text-white"></div>
+  <div class="caro_item hidden mx-auto top-0 left-0 right-0 bottom-0 absolute bg-gray-400  text-4xl text-white"></div>
+  <div class="caro_item hidden mx-auto top-0 left-0 right-0 bottom-0 absolute bg-gray-400  text-4xl text-white"></div>
+  <div class="caro_item hidden mx-auto top-0 left-0 right-0 bottom-0 absolute bg-gray-400  text-4xl text-white"></div>
+  <div class="caro_item hidden mx-auto top-0 left-0 right-0 bottom-0 absolute bg-blue-400  text-4xl text-white"></div>
+  <div class="caro_item hidden mx-auto top-0 left-0 right-0 bottom-0 absolute bg-teal-400  text-4xl text-white"></div>
+  <div class="caro_item hidden mx-auto top-0 left-0 right-0 bottom-0 absolute bg-red-400   text-4xl text-white"></div>
+  <div class="caro_item hidden mx-auto top-0 left-0 right-0 bottom-0 absolute bg-pink-400  text-4xl text-white"></div>
+  <a class="prev absolute top-1/2 left-0 [transform:translateY(-50%)] cursor-pointer text-4xl text-white" onclick="plusSlides(-1, 1)">&#10094;</a>
+  <a class="next absolute top-1/2 right-0 [transform:translateY(-50%)] cursor-pointer text-4xl text-white" onclick="plusSlides(1, 1)">&#10095;</a> 
+  <div class="car_nav_wrap absolute flex gap-2 bottom-3 left-1/2 [transform:translate(-50%,-50%);]">
+    <!-- <div class="car_nav h-4 w-4 rounded-full bg-white" onclick="nev_caro(1)"></div>
+    <div class="car_nav h-4 w-4 rounded-full bg-white" onclick="nev_caro(2)"></div>
+    <div class="car_nav h-4 w-4 rounded-full bg-white" onclick="nev_caro(3)"></div>
+    <div class="car_nav h-4 w-4 rounded-full bg-white" onclick="nev_caro(4)"></div>
+    <div class="car_nav h-4 w-4 rounded-full bg-white" onclick="nev_caro(5)"></div> -->
+  </div>
+
+</div>
+ 
+<script>
+  let init_caro=1
+  let caro_item = document.querySelectorAll('.caro_item')
+  let car_nav_wrap = document.querySelector('.car_nav_wrap')
+
+
+  for (let index = 0; index < caro_item.length; index++) {
+      caro_item[index].innerHTML=index+1 + "/" + caro_item.length
+      car_nav_wrap.innerHTML +="<div class='car_nav h-4 w-4 rounded-full bg-white' onclick='nev_caro("+ [index+1] +")'></div>"
+    }
+  function caro_main_fuc(n){
+    
+    if(init_caro>caro_item.length){
+      init_caro=1
+    }
+    if(init_caro<1){
+      init_caro=caro_item.length
+    }
+    
+    for (let index = 0; index < caro_item.length; index++) {
+      caro_item[index].classList.add('hidden')   
+    }
+    caro_item[init_caro-1].classList.remove('hidden')
+
+
+    car_nav=document.querySelectorAll('.car_nav')
+
+    for (let index = 0; index < car_nav.length; index++) {
+      car_nav[index].className = car_nav[index].className.replace(" bg-black", "");
+    }
+    car_nav[init_caro-1].className+=' bg-black' 
+
+    init_caro++
+    setTimeout(caro_main_fuc, 1000);
+
+  }
+
+caro_main_fuc(init_caro)
+
+function plusSlides(n){
+    caro_main_fuc(init_caro+=n);
+  }
+
+function nev_caro(n){
+  caro_main_fuc(init_caro=n);
+}
+</script>
+ 
+</body>
+</html>
